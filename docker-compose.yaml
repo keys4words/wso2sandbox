@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  wso2:
+    image: wso2/wso2am:4.1.0
+    container_name: api-manager
+    ports:
+    - "8280:8280"
+    - "8243:8243" 
+    - "9443:9443" # /carbon   /devportal   /publisher
+    - "9999:9999"   #jmx
+    - "11111:11111" #jmx
+    volumes:
+      - ./deployment.toml:/home/wso2carbon/repository/conf/deployment.toml:ro
+      - ./logs:/home/wso2carbon/repository/logs/

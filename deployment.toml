@@ -1,0 +1,5 @@
+[monitoring.jmx]
+rmi_server_start=false
+
+[database.shared_db]
+jmx_enable = "true"
