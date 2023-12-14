@@ -1,0 +1,61 @@
+version: '3.3'
+services:
+  s1: &s
+    image: keys4words/goserver:2.0
+    ports:
+    - published: 5001
+      target: 3333
+    
+  s2:
+    <<: *s
+    ports:
+    - published: 5002
+      target: 3333
+    
+  s3:
+    <<: *s
+    ports:
+    - published: 5003
+      target: 3333
+  
+  s4:
+    <<: *s
+    ports:
+    - published: 5004
+      target: 3333
+    
+  s5:
+    <<: *s
+    ports:
+    - published: 5005  
+      target: 3333
+
+  s6:
+    <<: *s
+    ports:
+    - published: 5006
+      target: 3333
+    
+  s7:
+    <<: *s
+    ports:
+    - published: 5007
+      target: 3333
+  
+  s8:
+    <<: *s
+    ports:
+    - published: 5008
+      target: 3333
+    
+  s9:
+    <<: *s
+    ports:
+    - published: 5009
+      target: 3333
+
+  s10:
+    <<: *s
+    ports:
+    - published: 5010
+      target: 3333

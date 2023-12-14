@@ -1,0 +1,312 @@
+openapi: 3.1.0
+info:
+  title: MyApiOne
+  version: 0.1.0
+servers:
+ -
+  url: /
+security:
+ -
+  default: []
+paths:
+  /:
+    get:
+      summary: Main
+      operationId: main__get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+       -
+        default: []
+      x-throttling-tier: Unlimited
+      x-auth-type: Application & Application User
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /api/persons:
+    get:
+      summary: Get Persons
+      operationId: get_persons_api_persons_get
+      parameters:
+       -
+        name: gender
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Gender
+          anyOf:
+           - {}
+           - {}
+       -
+        name: age
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Age
+          anyOf:
+           - {}
+           - {}
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+       -
+        default: []
+      x-throttling-tier: Unlimited
+      x-auth-type: Application & Application User
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+    post:
+      summary: Create Person
+      operationId: create_person_api_persons_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Data
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonOutput'
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+       -
+        default: []
+      x-throttling-tier: Unlimited
+      x-auth-type: Application & Application User
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+  /api/persons/{person_id}:
+    get:
+      summary: Get Person
+      operationId: get_person_api_persons__person_id__get
+      parameters:
+       -
+        name: person_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Person Id
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+       -
+        default: []
+      x-throttling-tier: Unlimited
+      x-auth-type: Application & Application User
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+    put:
+      summary: Edit Person
+      operationId: edit_person_api_persons__person_id__put
+      parameters:
+       -
+        name: person_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Person Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Data
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonOutput'
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+       -
+        default: []
+      x-throttling-tier: Unlimited
+      x-auth-type: Application & Application User
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+    delete:
+      summary: Delete Person
+      operationId: delete_person_api_persons__person_id__delete
+      parameters:
+       -
+        name: person_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Person Id
+      responses:
+        "204":
+          description: Successful Response
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+       -
+        default: []
+      x-throttling-tier: Unlimited
+      x-auth-type: Application & Application User
+      x-wso2-application-security:
+        security-types:
+         - oauth2
+        optional: false
+components:
+  schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      properties:
+        detail:
+          title: Detail
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    PersonOutput:
+      title: PersonOutput
+      required:
+       - address
+       - age
+       - city
+       - email
+       - first_name
+       - gender
+       - id
+       - last_name
+       - phone
+      properties:
+        first_name:
+          title: First Name
+        last_name:
+          title: Last Name
+        gender:
+          title: Gender
+        age:
+          title: Age
+        email:
+          title: Email
+        phone:
+          title: Phone
+        city:
+          title: City
+        address:
+          title: Address
+        id:
+          title: Id
+    ValidationError:
+      title: ValidationError
+      required:
+       - loc
+       - msg
+       - type
+      properties:
+        loc:
+          title: Location
+          items:
+            anyOf:
+             - {}
+             - {}
+        msg:
+          title: Message
+        type:
+          title: Error Type
+  securitySchemes:
+    default:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://test.com
+          scopes: {}
+x-wso2-auth-header: Authorization
+x-wso2-cors:
+  corsConfigurationEnabled: false
+  accessControlAllowOrigins:
+   - '*'
+  accessControlAllowCredentials: false
+  accessControlAllowHeaders:
+   - authorization
+   - Access-Control-Allow-Origin
+   - Content-Type
+   - SOAPAction
+   - apikey
+   - Internal-Key
+  accessControlAllowMethods:
+   - GET
+   - PUT
+   - POST
+   - DELETE
+   - PATCH
+   - OPTIONS
+x-wso2-production-endpoints:
+  urls:
+   - http://192.168.50.38:5001/
+  type: http
+x-wso2-sandbox-endpoints:
+  urls:
+   - http://192.168.50.38:5001/
+  type: http
+x-wso2-basePath: /myapione/0.1.0
+x-wso2-transports:
+ - http
+ - https
+x-wso2-response-cache:
+  enabled: false
+  cacheTimeoutInSeconds: 300

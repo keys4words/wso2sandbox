@@ -17,6 +17,7 @@ services:
   jmeter:
     image: justb4/jmeter:5.5
     container_name: jmeter
-    entrypoint: ["bash", "-c", "jmeter -n -t bin/examples/CSVSample.jmx -l bin/examples/mytest1.jtl"]
+    # entrypoint: ["bash", "-c", "jmeter -n -t bin/examples/CSVSample.jmx -l bin/examples/mytest1.jtl"]
+    entrypoint: ["bash", "-c", "jmeter"]
     volumes:
       - ./jmeter/results/:/opt/apache-jmeter-5.5/bin/examples/
